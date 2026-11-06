@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090713">
+<title>HẢI YẾN KARAOKE</title>
+<style>
+:root{--bg:#090713;--panel:#171226;--purple:#a855f7;--pink:#ec4899;--text:#fff;--muted:#b9adc9}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top,#25123e,#090713 55%);color:var(--text);font-family:Arial,sans-serif}
+button,input{font:inherit}
+button,a{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.container{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:10;background:#0d0918ed;backdrop-filter:blur(15px);border-bottom:1px solid #ffffff18}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{display:flex;align-items:center;gap:12px;font-weight:900}
+.logo-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(135deg,var(--purple),var(--pink));font-size:23px}
+.logo small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px;margin-top:4px}
+nav{display:flex;gap:23px;font-size:14px;color:#ddd}
+nav a:hover{color:#dba5ff}
+.btn{border:0;border-radius:12px;padding:13px 19px;background:linear-gradient(110deg,#8b5cf6,#ec4899);color:white;font-weight:bold;display:inline-block;transition:.2s}
+.btn:hover{filter:brightness(1.15);transform:translateY(-2px)}
+.outline{background:#ffffff0b;border:1px solid #bd8ae866}
+.hero{padding:75px 0}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:35px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#d5a0ff;font-weight:bold}
+h1{font-size:clamp(40px,6vw,68px);line-height:1.08;margin:20px 0;letter-spacing:-2px}
+.gradient{background:linear-gradient(100deg,#c084fc,#f472b6);color:transparent;background-clip:text}
+.hero p{font-size:16px;color:var(--muted);line-height:1.8}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.visual{min-height:300px;display:grid;place-items:center}
+.sound{width:min(370px,100%);padding:30px;border-radius:25px;text-align:center;background:linear-gradient(145deg,#30204c,#141020);border:1px solid #ffffff25;box-shadow:0 25px 80px #0008;transform:rotate(-3deg)}
+.mic{font-size:75px;margin:28px}
+.equalizer{display:flex;gap:5px;justify-content:center;align-items:center;height:45px}
+.equalizer i{width:5px;border-radius:5px;background:#dc91ff;animation:wave .7s infinite alternate}
+.equalizer i:nth-child(2n){animation-delay:.3s}
+.equalizer i:nth-child(3n){animation-delay:.5s}
+@keyframes wave{from{height:8px}to{height:40px}}
+section{padding:55px 0}
+.section-title{font-size:30px;margin:10px 0}
+.muted{color:var(--muted);line-height:1.7}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:17px;margin-top:25px}
+.feature,.app-card,.guide{background:linear-gradient(145deg,#1d1630,#110e1d);border:1px solid #ffffff12;border-radius:18px;padding:22px}
+.feature-icon{font-size:30px;margin-bottom:15px}
+.feature p{font-size:14px;color:var(--muted);line-height:1.7}
+.library{background:#ffffff05;border-block:1px solid #ffffff12}
+.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:25px 0}
+.search{flex:1;min-width:220px;background:#171226;border:1px solid #ffffff20;border-radius:12px;padding:14px;color:white;outline:none}
+.search:focus{border-color:var(--purple)}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filter{border:1px solid #ffffff20;background:#171226;color:white;border-radius:10px;padding:12px 17px}
+.filter.active{background:linear-gradient(110deg,#803fc1,#c53b91)}
+.app-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.app-card{padding:0;overflow:hidden;transition:.2s;text-align:center}
+.app-card:hover,.app-card:focus{transform:translateY(-5px);border-color:#ba79f4;outline:none}
+.icon-box{width:100%;height:160px;display:flex;align-items:center;justify-content:center;font-size:60px;position:relative}
+.icon-bg-1{background:linear-gradient(135deg,#1e88e3,#22c55e)}
+.icon-bg-2{background:linear-gradient(135deg,#eab308,#f97316)}
+.icon-bg-3{background:linear-gradient(135deg,#0369a1,#14b8a6)}
+.icon-bg-4{background:linear-gradient(135deg,#8b5cf6,#ec4899)}
+.icon-bg-5{background:linear-gradient(135deg,#6d28d9,#be185d)}
+.icon-glow{position:absolute;width:80px;height:80px;border-radius:50%;background:inherit;filter:blur(20px);opacity:.4;z-index:0}
+.icon-emoji{position:relative;z-index:1;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.info{padding:18px;text-align:left}
+.info p{color:var(--muted);font-size:13px;line-height:1.6;min-height:40px}
+.tag{font-size:10px;color:#e5b8ff;letter-spacing:1px;display:inline-block;background:#ffffff0a;padding:3px 8px;border-radius:6px;margin-bottom:8px}
+.info-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px}
+.open-btn{font-size:14px;padding:10px 16px;border-radius:10px;background:linear-gradient(110deg,#8b5cf6,#ec4899);color:white;font-weight:bold;border:none;width:100%;transition:.2s}
+.open-btn:hover{filter:brightness(1.1);transform:scale(1.02)}
+.guide-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:25px}
+.guide li{color:var(--muted);line-height:1.9;font-size:14px}
+.cta{background:linear-gradient(120deg,#522c79aa,#90285c88);border:1px solid #ffffff20;border-radius:20px;text-align:center;padding:35px}
+footer{border-top:1px solid #ffffff18;padding:28px 0;color:var(--muted);font-size:13px}
+.footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.app-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){nav{display:none}.features,.app-grid,.guide-grid{grid-template-columns:1fr}.hero{padding:45px 0}.visual{min-height:250px}.section-title{font-size:26px}.icon-box{height:140px;font-size:50px}}
+</style>
+</head>
+<body>
+<header>
+<div class="container nav">
+<a class="logo" href="#home">
+<div class="logo-icon">🎤</div>
+<div>HẢI YẾN KARAOKE<small>KHO PHẦN MỀM KARAOKE</small></div>
+</a>
+<nav>
+<a href="#home">Trang chủ</a>
+<a href="#features">Giới thiệu</a>
+<a href="#library">Kho phần mềm</a>
+<a href="#guide">Hướng dẫn</a>
+</nav>
+<a class="btn" href="#library">Khám phá ngay</a>
+</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div>
+<div class="eyebrow">✦ NỀN TẢNG GIẢI TRÍ KARAOKE</div>
+<h1>Thế giới karaoke<br><span class="gradient">trong tầm tay</span></h1>
+<p>Chào mừng bạn đến với HẢI YẾN KARAOKE. Kho ứng dụng karaoke trực tuyến — nhấn nút là mở ngay, không cần cài đặt phức tạp.</p>
+<div class="actions">
+<a class="btn" href="#library">🎵 Chọn ứng dụng ngay</a>
+<a class="btn outline" href="#guide">Hướng dẫn sử dụng</a>
+</div>
+</div>
+<div class="visual">
+<div class="sound">
+<div style="color:#cdb9e7;font-size:12px;letter-spacing:2px">HẢI YẾN KARAOKE</div>
+<div class="mic">🎤</div>
+<h2>Sân khấu của bạn</h2>
+<p class="muted">Âm nhạc kết nối cảm xúc</p>
+<div class="equalizer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+<div class="eyebrow">ĐIỂM NỔI BẬT</div>
+<h2 class="section-title">Trải nghiệm tiện lợi</h2>
+<p class="muted">Mở ngay trên mọi thiết bị — chỉ cần một cú nhấn.</p>
+<div class="features">
+<div class="feature"><div class="feature-icon">🌐</div><h3>Mở trực tiếp</h3><p>Nhấn nút là vào ngay — không cần tab mới, không cần chờ tải.</p></div>
+<div class="feature"><div class="feature-icon">📺</div><h3>Tối ưu mọi màn hình</h3><p>Giao diện rõ ràng trên TV, máy tính bảng và điện thoại.</p></div>
+<div class="feature"><div class="feature-icon">🎨</div><h3>Dễ phân biệt</h3><p>Mỗi ứng dụng có màu sắc & biểu tượng riêng — chọn đúng ngay lần đầu.</p></div>
+</div>
+</div>
+</section>
+
+<section class="library" id="library">
+<div class="container">
+<div class="eyebrow">THƯ VIỆN ỨNG DỤNG</div>
+<h2 class="section-title">Chọn ứng dụng — mở ngay</h2>
+<p class="muted">Nhấn nút <strong>Mở ngay</strong> sẽ chuyển thẳng đến ứng dụng trong cùng trang.</p>
+<div class="toolbar">
+<input class="search" id="search" placeholder="🔍 Tìm tên ứng dụng..." oninput="renderApps()">
+<div class="filters">
+<button class="filter active" onclick="setFilter('all',this)">Tất cả</button>
+<button class="filter" onclick="setFilter('room',this)">Phòng hát</button>
+<button class="filter" onclick="setFilter('player',this)">Trình phát</button>
+</div>
+</div>
+<p class="muted" id="count"></p>
+<div class="app-grid" id="appGrid"></div>
+</div>
+</section>
+
+<section id="guide">
+<div class="container">
+<div class="eyebrow">HỖ TRỢ NGƯỜI DÙNG</div>
+<h2 class="section-title">Cách sử dụng</h2>
+<div class="guide-grid">
+<div class="guide"><h3>📺 Trên Android TV</h3><ol><li>Mở trang web trên trình duyệt TV.</li><li>Chọn ứng dụng bạn muốn — xem màu sắc & biểu tượng để phân biệt.</li><li>Nhấn nút <strong>Mở ngay</strong> — trang sẽ chuyển thẳng vào ứng dụng.</li><li>Quét mã QR hoặc nhập mã phòng để kết nối điện thoại.</li></ol></div>
+<div class="guide"><h3>📱 Trên điện thoại</h3><ol><li>Mở website bằng trình duyệt yêu thích.</li><li>Cuộn xuống tìm ứng dụng mong muốn.</li><li>Nhấn <strong>Mở ngay</strong> — tải nhanh, không cần chờ.</li><li>Làm theo hướng dẫn trên màn hình để bắt đầu hát.</li></ol></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="cta">
+<div class="eyebrow">HẢI YẾN KARAOKE</div>
+<h2>Sẵn sàng cất giọng?</h2>
+<p class="muted">Chọn ứng dụng bên trên và bắt đầu trải nghiệm ngay hôm nay.</p>
+<a class="btn" href="#library">↑ Chọn ứng dụng</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-row">
+<div><strong style="color:white">🎤 HẢI YẾN KARAOKE</strong><p>Kho ứng dụng karaoke trực tuyến — mở là hát.</p></div>
+<div>© <span id="year"></span> HẢI YẾN KARAOKE</div>
+</div>
+</footer>
+
+<script>
+const apps = [
+  {id:1,name:"Phòng KTV 526NWA",type:"room",icon:"🎤",iconBg:"icon-bg-1",desc:"Phòng hát riêng — xếp bài, hàng chờ, phát video trên màn hình TV.",launchUrl:"https://haiyenktv-yf4dxtms.manus.space"},
+  {id:2,name:"Hát Vui Stage 01",type:"player",icon:"🎶",iconBg:"icon-bg-2",desc:"Tìm bài YouTube karaoke, phát ngay hoặc xếp vào hàng chờ.",launchUrl:"https://hatvui-7s2qjvsp.manus.space"},
+  {id:3,name:"Phòng Riêng — Biển Đêm",type:"room",icon:"🌊",iconBg:"icon-bg-3",desc:"Tạo phòng hát riêng với mã QR và hàng chờ bền vững.",launchUrl:"https://haiyenkaraok-v7mrdekj.manus.space"},
+  {id:4,name:"Karaoke Đa Thiết Bị",type:"room",icon:"📲",iconBg:"icon-bg-4",desc:"Kết nối điện thoại với TV — nhập mã phòng hoặc quét QR.",launchUrl:"https://haiyenkaraok-ckwawhvy.manus.space"},
+  {id:5,name:"Karaoke Player — Tìm & Phát",type:"player",icon:"🎬",iconBg:"icon-bg-5",desc:"Tìm bài hát YouTube, bật chế độ karaoke, quản lý danh sách phát.",launchUrl:"https://haiyen-4v6wfx9h.manus.space"}
+];
+
+let filter = "all";
+const $ = id => document.getElementById(id);
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+function renderApps(){
+  const q = $("search").value.toLowerCase().trim();
+  const list = apps.filter(a => (filter === "all" || a.type === filter) && (a.name + " " + a.desc).toLowerCase().includes(q));
+  $("count").textContent = "Tìm thấy " + list.length + " ứng dụng";
+  $("appGrid").innerHTML = list.length ? list.map(a => `
+    <div class="app-card">
+      <div class="icon-box ${a.iconBg}">
+        <div class="icon-glow"></div>
+        <span class="icon-emoji">${a.icon}</span>
+      </div>
+      <div class="info">
+        <span class="tag">${a.type === "room" ? "PHÒNG HÁT" : "TRÌNH PHÁT"}</span>
+        <h3 style="margin:8px 0 4px 0;font-size:17px">${esc(a.name)}</h3>
+        <p>${esc(a.desc)}</p>
+        <a class="open-btn" href="${esc(a.launchUrl)}" target="_self" rel="noopener">▶ Mở ngay</a>
+      </div>
+    </div>
+  `).join("") : '<div class="muted" style="grid-column:1/-1;padding:30px;text-align:center">Không tìm thấy ứng dụng phù hợp.</div>';
+}
+
+function setFilter(f, button){
+  filter = f;
+  document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+  button.classList.add("active");
+  renderApps();
+}
+
+$("year").textContent = new Date().getFullYear();
+renderApps();
+</script>
+</body>
+</html>
