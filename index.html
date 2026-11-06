@@ -208,7 +208,7 @@ function renderApps(){
         <span class="tag">${a.type === "room" ? "PHÒNG HÁT" : "TRÌNH PHÁT"}</span>
         <h3 style="margin:8px 0 4px 0;font-size:17px">${esc(a.name)}</h3>
         <p>${esc(a.desc)}</p>
-        <a class="open-btn" href="${esc(a.launchUrl)}" target="_self" rel="noopener">▶ Mở ngay</a>
+        <a class="open-btn" href="${esc(a.launchUrl)}" target="_blank" rel="noopener">▶ Mở ngay</a>
       </div>
     </div>
   `).join("") : '<div class="muted" style="grid-column:1/-1;padding:30px;text-align:center">Không tìm thấy ứng dụng phù hợp.</div>';
